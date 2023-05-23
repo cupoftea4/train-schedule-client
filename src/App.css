@@ -1,0 +1,69 @@
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: .5rem;
+  }
+}
+
+
+.primary-btn {
+  background-color: var(--primary-clr);
+  padding: .325rem 1rem;
+  border-radius: .325rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color .25s;
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-hover-clr);
+}
+
+
+.react-datalist-input__container {
+  padding: 0 .5rem .5rem .5rem;
+}
+
+.react-datalist-input__container input {
+  padding: .5rem .625rem;
+}
+
+.react-datalist-input__container ul {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.react-datalist-input__container li {
+  background-color: var(--bg-clr);
+}
+
+.react-datalist-input__container mark {
+  background: var(--accent-clr);
+}
+
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .5rem;
+  padding: 1rem;
+}
+
+.schedule .route {
+  text-align: left;
+  background-color: var(--secondary-bg-clr);
+  border-radius: .624rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .1);
+  padding: .5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
