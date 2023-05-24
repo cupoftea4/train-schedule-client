@@ -1,7 +1,7 @@
 export type ScheduleOptions = {
   origin: string;
   destination: string;
-  departureTime?: number;
+  departureTime?: string;
   people?: number;
 }
 
@@ -17,8 +17,9 @@ export type ApiRoute = {
   id: number;
   originStation: TrainStation;
   destinationStation: TrainStation;
-  departureTime: number;
-  arrivalTime: number;
+  departureTime: string;
+  arrivalTime: string;
+  distance: number;
   price: number;
 }
 

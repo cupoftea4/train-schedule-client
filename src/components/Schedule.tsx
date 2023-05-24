@@ -1,18 +1,18 @@
 import { FC, useMemo } from "react";
 import { Route } from "../util/types";
-import { calculateMinuteDifference, formatTime } from "../util/helpers";
+import { calculateMinuteDifference, formatDate, formatTime, sortByDepartureTime } from "../util/helpers";
 
 type OwnProps = {
   schedule: Route[];
 }
 
 const Schedule: FC<OwnProps> = ({ schedule }) => {
-
   const routesByDate = useMemo(() => createMapByDate(schedule), [schedule]);
 
   function createMapByDate(schedule: Route[]) {
+    const sortedSchedule = sortByDepartureTime(schedule);
     const map: Record<string, Route[]> = {};
-    schedule.forEach(route => {
+    sortedSchedule.forEach(route => {
       const date = new Date(route.departureTime).toDateString();
       if (map[date]) {
         map[date].push(route);
@@ -26,11 +26,11 @@ const Schedule: FC<OwnProps> = ({ schedule }) => {
 
   return (
     <ul className="schedule">
-      {
-       Object.keys(routesByDate).map(date => {
+      { schedule.length === 0 && <li>No routes found</li>}
+      {Object.keys(routesByDate).map(date => {
           return (
             <li key={date}>
-              <h2>{date}</h2>
+              <h2>{formatDate(date)}</h2>
               <ul className="schedule">
                 {
                   routesByDate[date].map(route => {

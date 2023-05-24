@@ -29,3 +29,40 @@ export function calculateMinuteDifference(startDate: Date, endDate: Date): numbe
   const millisecondsPerMinute = 60000; // 1000 milliseconds * 60 seconds
   return Math.abs(Math.floor((endDate.getTime() - startDate.getTime()) / millisecondsPerMinute));
 }
+
+export function sortByDepartureTime<T extends { departureTime: Date }>(values: T[], order: 'asc' | 'desc' = 'asc') {
+  return values.sort((a, b) => {
+    return order === 'asc'
+      ? a.departureTime.valueOf() - b.departureTime.valueOf()
+      : b.departureTime.valueOf() - a.departureTime.valueOf();
+  });
+}
+
+export function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const today = new Date();
+
+  if (date.toDateString() === today.toDateString()) {
+    return "Today";
+  }
+
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  if (date.toDateString() === yesterday.toDateString()) {
+    return 'Yesterday';
+  }
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  if (date.toDateString() === tomorrow.toDateString()) {
+    return 'Tomorrow';
+  }
+
+  if (date.getFullYear() === today.getFullYear()) {
+    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  }
+
+  return date.toLocaleDateString();
+}

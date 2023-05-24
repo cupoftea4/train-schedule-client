@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import DatalistInput, { useComboboxControls } from 'react-datalist-input';
 
 type OwnProps = {
@@ -11,6 +11,7 @@ type OwnProps = {
   className?: string;
   initialDisplayedCount?: number;
   autoFocus?: boolean;
+  outerValue?: string | null;
 }
 
 const VirtualizedDataList: FC<OwnProps> = ({
@@ -22,7 +23,8 @@ const VirtualizedDataList: FC<OwnProps> = ({
     label = "",
     placeholder = "",
     initialDisplayedCount = 10, 
-    autoFocus = false
+    autoFocus = false,
+    outerValue = null
 }) => {
   const { value: inputValue, setValue: setInputValue } = useComboboxControls({ isExpanded: false });
   const [displayedCount, setDisplayedCount] = React.useState(initialDisplayedCount);
@@ -38,6 +40,12 @@ const VirtualizedDataList: FC<OwnProps> = ({
   const showMoreOptions = () => {
     setDisplayedCount(displayedCount + initialDisplayedCount);
   }
+
+  useEffect(() => {
+    if (outerValue !== null) {
+      setInputValue(outerValue);
+    }
+  }, [outerValue]);
 
   return (
     <DatalistInput

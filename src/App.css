@@ -1,20 +1,14 @@
 main {
-  max-width: 1280px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  --input-border: 1px solid rgb(200, 200, 200);
 }
-
-@media screen and (max-width: 768px) {
-  main {
-    padding: .5rem;
-  }
-}
-
 
 .primary-btn {
   background-color: var(--primary-clr);
-  padding: .325rem 1rem;
+  padding: .5rem 1rem;
   border-radius: .325rem;
   color: white;
   font-weight: bold;
@@ -26,44 +20,149 @@ main {
   background-color: var(--primary-hover-clr);
 }
 
-
-.react-datalist-input__container {
-  padding: 0 .5rem .5rem .5rem;
-}
-
 .react-datalist-input__container input {
   padding: .5rem .625rem;
+  font-size: 1rem;
+  border: var(--input-border);
 }
 
 .react-datalist-input__container ul {
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .react-datalist-input__container li {
   background-color: var(--bg-clr);
+  transition: background-color .25s;
+}
+
+.react-datalist-input__container li:hover {
+  background-color: var(--secondary-bg-clr);
 }
 
 .react-datalist-input__container mark {
   background: var(--accent-clr);
 }
 
+/* Options */
+.options {
+  display: flex;
+}
 
+.options__selects {
+  display: flex;
+  flex-basis: 100%;
+  gap: .5rem;
+  padding: .5rem;
+}
+
+.options__date {
+  padding: .325rem .5rem;
+  border-radius: .325rem;
+  margin-inline: .5rem;
+  border: var(--input-border);
+}
+
+button.find {
+  min-width: 30%;
+  margin-block: .5rem;
+}
+
+/* Routes */
 .schedule {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: .5rem;
-  padding: 1rem;
+  padding-block: 1rem;
+  gap: .75rem;
 }
 
 .schedule .route {
   text-align: left;
   background-color: var(--secondary-bg-clr);
   border-radius: .624rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, .1);
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .1);
   padding: .5rem 1rem;
   display: flex;
+  gap: .5rem;
   justify-content: space-between;
 }
 
+.schedule .route h3 {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+
+/* Modal */
+.modal {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--secondary-bg-clr);
+  padding: 20px;
+  border-radius: .5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal .header {
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.modal .header .close {
+  font-size: 3rem;
+  line-height: .5;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+
+/* Form Fields */
+.modal label {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  text-align: left;
+
+}
+
+.modal input {
+  padding: .325rem .5rem;
+  border-radius: .325rem;
+  border: var(--input-border);
+}
+
+.modal button[type="submit"] {
+  width: 100%;
+}
+
+.modal button[type="submit"]:hover {
+  background-color: var(--primary-hover-clr);
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: .5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .options__selects {
+    flex-direction: column;
+  }
+}

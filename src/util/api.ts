@@ -7,11 +7,30 @@ export function getStations(controller: AbortController): Promise<TrainStation[]
 }
 
 export function getRoutes(options: ScheduleOptions): Promise<ApiRoute[]> {
-  const { origin, destination } = options;
+  const { origin, destination, departureTime } = options;
 
   const url = new URL(`${SERVER_ORIGIN}/routes/q`);
   url.searchParams.append("src", origin);
   url.searchParams.append("dest", destination);
+  if (departureTime) {
+    url.searchParams.append("date", departureTime);
+  }
 
   return fetch(url.toString()).then(res => res.json());
+}
+
+type PostRoute = Omit<ApiRoute, 'id' | 'originStation' | 'destinationStation'> & {originStationId: number, destinationStationId: number};
+
+export function createRoute(route: PostRoute): Promise<ApiRoute> {
+  return fetch(`${SERVER_ORIGIN}/routes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(route),
+  }).then(res => res.json());
+}
+
+export function getAllRoutes(): Promise<ApiRoute[]> {
+  return fetch(`${SERVER_ORIGIN}/routes`).then(res => res.json());
 }

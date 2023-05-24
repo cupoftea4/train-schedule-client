@@ -3,16 +3,16 @@
   --primary-hover-clr: #5e83ab;
   --accent-clr: #f28e2b;
 
-  --bg-clr: #555555;
-  --secondary-bg-clr: #717171;
+  --bg-clr: #1e1e1e;
+  --secondary-bg-clr: #525252;
   --fg-clr: #edecec;
 }
-
+  
 @media screen and (prefers-color-scheme: light) {
   :root {
     --bg-clr: #edecec;
-    --secondary-bg-clr: #d4d4d4;
-    --fg-clr: #555555;
+    --secondary-bg-clr: #dadada;
+    --fg-clr: #242424;
   }
 }
 
