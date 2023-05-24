@@ -1,6 +1,6 @@
 import { ApiRoute, TrainStation, ScheduleOptions } from "./types";
 
-const SERVER_ORIGIN = "http://127.0.0.1:3001";
+const SERVER_ORIGIN = "https://frank-quarter-production.up.railway.app";
 
 export function getStations(controller: AbortController): Promise<TrainStation[]> {
   return fetch(`${SERVER_ORIGIN}/stations`, { signal: controller.signal }).then(res => res.json());
@@ -28,7 +28,10 @@ export function createRoute(route: PostRoute): Promise<ApiRoute> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(route),
-  }).then(res => res.json());
+  }).then(res => {
+    if (!res.ok) throw new Error(res.statusText);
+    return res.json()
+  });
 }
 
 export function getAllRoutes(): Promise<ApiRoute[]> {

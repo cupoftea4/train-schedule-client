@@ -10,10 +10,11 @@ import { createRoute } from "../util/api";
 
 type OwnProps = {
   stations: TrainStation[];
+  updateRoutes: () => void;
   closeModal: () => void;
 }
 
-const RouteModal: FC<OwnProps> = ({stations, closeModal}) => {
+const RouteModal: FC<OwnProps> = ({stations, closeModal, updateRoutes}) => {
   const [formData, setFormData] = useState({
     origin: '',
     destination: '',
@@ -47,8 +48,13 @@ const RouteModal: FC<OwnProps> = ({stations, closeModal}) => {
       distance: Number(formData.distance),
       price: Number(formData.price)
     };
-    createRoute(res).then(() => toast.success("Route created successfully"));
-    closeModal();
+    createRoute(res)
+      .then(() => {
+        toast.success("Route created successfully")
+        updateRoutes();
+        closeModal();
+      })
+      .catch(() => toast.error("Could not create route"));
   };
 
   return (

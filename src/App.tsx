@@ -32,6 +32,10 @@ function App() {
       .then(setSchedule)
   }
 
+  function updateRoutes() {
+    getAllRoutes().then(data => data.map(apiRoute => toClientRoute(apiRoute))).then(setSchedule);
+  }
+
   return (
     <main>
       <h1>Welcome to Imaginary Train Station</h1>
@@ -40,7 +44,7 @@ function App() {
 
       <Schedule schedule={schedule}/>
       <button onClick={() => setIsModalOpen(true)}>+ Create route</button>
-      { isModalOpen && <RouteModal stations={stations} closeModal={() => setIsModalOpen(false)} />}
+      { isModalOpen && <RouteModal stations={stations} closeModal={() => setIsModalOpen(false)} updateRoutes={updateRoutes} />}
       <ToastContainer />
     </main>
   )

@@ -1,6 +1,7 @@
 {
   "name": "train-schedule",
   "private": true,
+  "homepage": "/train-schedule/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
